@@ -1,0 +1,18 @@
+.header-menu {
+    width: 100%;
+    text-align: left;
+    box-sizing: border-box;
+    background-color: #f29100;
+}
+
+.under-development {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 10px
+}
+
+.intervene-title {
+    margin-left: 10px;
+    color: #ffffff;
+    text-decoration: none;
+}

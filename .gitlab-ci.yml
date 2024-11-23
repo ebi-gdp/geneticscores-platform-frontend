@@ -1,0 +1,38 @@
+variables:
+  TARGET_PLATFORM: 'linux/amd64'
+
+stages:
+  - build
+  - containerize
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+
+build:
+  stage: build
+  image: node:21.6.1-alpine
+  variables:
+    CI: "false"
+  script:
+    - npm install
+    - NODE_OPTIONS="--openssl-legacy-provider" npm run-script build
+  artifacts:
+    paths:
+      - build/
+
+containerize:
+  stage: containerize
+  image:
+    name: gcr.io/kaniko-project/executor:v1.14.0-debug
+    entrypoint: [ "" ]
+  script:
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/docker/Dockerfile"
+      --build-arg "TARGET_PLATFORM=${TARGET_PLATFORM}"
+      --destination "${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}-dev"
+  only:
+    - /^\d+\.\d+\.\d+$/
+    - tags

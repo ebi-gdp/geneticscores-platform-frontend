@@ -1,0 +1,30 @@
+/* Full-screen overlay */
+.fullscreen-overlay {
+    position: fixed; /* Covers the entire window */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Viewport width */
+    height: 100vh; /* Viewport height */
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+    z-index: 9999; /* High z-index to overlay on top of all elements */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center the content */
+}
+
+.overlay-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.action-button:hover {
+    background-color: #0056b3;
+}
+
+/* Background content (can be styled however you'd like) */
+.background-content {
+    padding: 20px;
+    text-align: center;
+}

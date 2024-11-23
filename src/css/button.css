@@ -1,0 +1,28 @@
+.vf-button-disabled {
+    background-color: #ccc;
+    box-shadow: none;
+}
+
+.vf-button-disabled:focus, .vf-button-disabled:hover {
+    outline: none;
+    cursor: not-allowed;
+    transition: none;
+    -webkit-transform: none;
+    -webkit-transition: none;
+    box-shadow: none;
+}
+
+.vf-button-disabled:active {
+    outline: none;
+    cursor: not-allowed;
+    transition: none;
+    -webkit-transform: none;
+    -webkit-transition: none;
+    box-shadow: none;
+}
+
+.button-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

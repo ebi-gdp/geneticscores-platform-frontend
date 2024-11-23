@@ -1,0 +1,164 @@
+/*.fullscreen-div {
+    position: fixed; !* Fixed position relative to the viewport *!
+    top: 0;
+    left: 0;
+    width: 100%; !* Full width without causing overflow *!
+    height: 100%; !* Full height without causing overflow *!
+    justify-content: center; !* Optional: Center content horizontally *!
+    align-items: center; !* Optional: Center content vertically *!
+    z-index: 1;
+}
+
+.inner-div {
+    position: absolute; !* Position relative to the parent *!
+    width: 70%; !* 70% of the parent's width *!
+    height: 70%; !* 70% of the parent's height *!
+    top: 50%; !* Move down 50% from the top *!
+    left: 50%; !* Move right 50% from the left *!
+    transform: translate(-50%, -50%); !* Center the div by moving it back half of its size *!
+    overflow: auto;
+    z-index: 2;
+}
+
+.footer {
+    position: absolute; !* Position relative to the parent *!
+    bottom: 0; !* Align to the bottom *!
+    left: 50%; !* Center the footer horizontally *!
+    transform: translateX(-50%); !* Adjust the centering by moving it left by half of its width *!
+    width: 100%; !* Full width for the footer *!
+    padding: 10px; !* Add some padding *!
+}*/
+
+.fullscreen-div {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: space-between; /* Spread items within full height */
+    align-items: center;
+    z-index: 1;
+}
+
+.inner-div {
+    position: relative;
+    width: 100%;
+    max-width: 80%;
+    height: auto;
+    max-height: 80vh;
+    overflow: auto;
+    padding: 20px;
+    background: #fff;
+    z-index: 2;
+    flex-grow: 1; /* Take available space between header and footer */
+}
+
+.header {
+    width: 100%;
+}
+
+.footer {
+    width: 100%;
+    padding: 10px;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+
+.white-text {
+    color: white;
+}
+
+.text-link {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.red-text {
+    color: red;
+}
+
+.vl-red-text {
+    color: red;
+    border-left: 3px solid red;
+    padding-left: 1%;
+    margin-bottom: 2%;
+}
+
+.custom-textarea {
+    border: 1px solid #ccc;
+    padding: 8px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 150px;
+    overflow-y: auto;
+    outline: none;
+    position: relative;
+    white-space: pre-wrap; /* Allows line breaks in placeholder text */
+}
+
+/* Placeholder styling */
+.custom-textarea::before {
+    content: "PGS001229\A PGS000882\A PGS000102"; /* Placeholder text */
+    color: #999;
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    pointer-events: none;
+}
+
+/* Hide placeholder when content is present */
+.custom-textarea.has-content::before {
+    content: "";
+}
+
+hr {
+    height: 2px;
+    border-width: 0;
+    color: gray;
+    background-color: black;
+}
+
+.message {
+    background-color: white; /* Background color for the message box */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optional: Adds a shadow for better visibility */
+}
+
+.text-center-alignment {
+    text-align: right;
+}
+
+.vf-table-additional {
+    width: 100%;
+}
+
+.overlay-unauthorized {
+    position: fixed; /* Use fixed positioning */
+    top: -30%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.pagination {
+    position: absolute; /* or absolute */
+    z-index: 3; /* Make sure it's higher than overlapping elements */
+    pointer-events: auto;
+}
+
+.spacer {
+    height: 50px; /* Adds space after the absolute div */
+}
+
+.div-content-margin {
+    padding-left: 2px;
+}

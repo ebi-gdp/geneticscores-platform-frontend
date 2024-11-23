@@ -1,0 +1,40 @@
+.vf-link-button {
+    border-bottom: none;
+    text-decoration: none;
+    color: #3b6fb6;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font: inherit; /* Inherit font styling from parent for consistency */
+}
+
+.vf-link-button:hover {
+    color: #193f90;
+    text-decoration: underline;
+    border-bottom: none;
+}
+
+.vf-link-button:visited {
+    color: #563d82;
+    border-bottom: none;
+}
+
+.vf-link-button:visited:hover {
+    color: #563d82;
+    text-decoration: underline;
+}
+
+.vf-link-button[disabled] {
+    cursor: not-allowed;
+    pointer-events: none;
+    color: gray; /* Optional: change color to indicate disabled state */
+}
+
+.vf-link-button--visited {
+    color: #734595 !important;
+}
+
+.vf-link-button--hover {
+    color: #193f90 !important;
+}
