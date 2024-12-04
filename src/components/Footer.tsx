@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import VfBanner from "./js/vf-banner.react";
 
 const Background = {
@@ -6,7 +6,46 @@ const Background = {
 }
 
 export const Footer = () => {
-    const bannerMessage = "This website uses cookies, and the limiting processing of your personal data to function. By using the site you are agreeing to this as outlined in our <a className='vf-banner__link' style='color: white; text-decoration: underline' href='JavaScript:Void(0);'>Privacy Notice</a> and <a className='vf-banner__link' style='color: white; text-decoration: underline' href='JavaScript:Void(0);'>Terms Of Use</a>.";
+
+    useEffect(() => {
+        // Create a style element
+        const style = document.createElement("style");
+        style.innerHTML = `
+              .common-link {
+                color: blue;
+                text-decoration: underline !important;
+                cursor: pointer;
+              }
+        `;
+
+        document.head.appendChild(style);
+
+        const privacyNoticeLink = document.getElementById("privacy-notice");
+        const termsOfUseLink = document.getElementById("terms-of-use");
+
+        privacyNoticeLink?.addEventListener("click", privacyNoticePage);
+        termsOfUseLink?.addEventListener("click", termOfUsePage);
+
+        return () => {
+            privacyNoticeLink?.removeEventListener("click", privacyNoticePage);
+            termsOfUseLink?.removeEventListener("click", termOfUsePage);
+            document.head.removeChild(style);
+        };
+    }, []);
+
+    const privacyNoticePage = () => {
+        window.open("https://www.ebi.ac.uk/data-protection/privacy-notice/intervene-platform-analysis-service", "_blank", "noopener, noreferrer");
+    }
+
+    const termOfUsePage = () => {
+        window.open("https://www.ebi.ac.uk/about/terms-of-use", "_blank", "noopener, noreferrer");
+    }
+
+    const bannerMessage = `This website uses cookies, and the limiting processing of your personal data to function. By using the site you are agreeing to this as outlined in our 
+    <a id="privacy-notice" class="common-link">Privacy Notice</a> 
+    and 
+    <a id="terms-of-use" class="common-link">Terms Of Use</a>.
+    `;
     return (
         <>
             <br/>
