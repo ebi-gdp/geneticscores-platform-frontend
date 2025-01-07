@@ -20,15 +20,15 @@
 }
 
 .overlay-small-spinner {
-    position: fixed; /* Use fixed positioning */
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    /* background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    position: absolute; /* Use absolute positioning to limit scope */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Offset by half the spinner's width/height */
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's above most elements, but not menus */
+    pointer-events: none; /* Allow clicks to pass through the spinner */
 }
 
 .spinner-container {

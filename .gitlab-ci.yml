@@ -1,9 +1,18 @@
 variables:
   TARGET_PLATFORM: 'linux/amd64'
+  TAG_REGEX: '/^\d+\.\d+\.\d+$/'
+  DEPLOY_STAGE: 'DEPLOY'
+  STAGE:
+    description: 'Pipeline stage. For deployment stage set this value to DEPLOY'
+    value: 'BUILD_CONTAINERIZE'
+  PLATFORM_ENV:
+    description: 'Platform environment, dev is default. For production use prod, only required for DEPLOY stage.'
+    value: 'dev'
 
 stages:
   - build
   - containerize
+  - deploy
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
@@ -21,6 +30,9 @@ build:
   artifacts:
     paths:
       - build/
+  rules:
+    - if: '$STAGE != $DEPLOY_STAGE'
+      when: always
 
 containerize:
   stage: containerize
@@ -33,6 +45,32 @@ containerize:
       --dockerfile "${CI_PROJECT_DIR}/docker/Dockerfile"
       --build-arg "TARGET_PLATFORM=${TARGET_PLATFORM}"
       --destination "${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}-dev"
-  only:
-    - /^\d+\.\d+\.\d+$/
-    - tags
+  rules:
+    - if: '$CI_COMMIT_TAG && $CI_COMMIT_TAG =~ $TAG_REGEX && $STAGE != $DEPLOY_STAGE'
+      when: always
+
+deploy:
+  stage: deploy
+  image: alpine/k8s:1.32.0
+  variables:
+    K8S_CLUSTER_AGENT: gdp/ga4k:gcp-k8s-agent
+    ENV_FILE: 'gcp-dev-env'
+    NAMESPACE: 'intervene-dev'
+  before_script:
+    - |
+      if [[ "$PLATFORM_ENV" == "prod" ]]; then
+        export NAMESPACE="intervene-prod"
+        export ENV_FILE="gcp-prod-env"
+        export K8S_CLUSTER_AGENT="gdp/ga4k:gcp-prod-k8s-agent"
+      fi
+  script:
+    - kubectl config get-contexts
+    - kubectl config use-context $K8S_CLUSTER_AGENT
+    - kubectl -n $NAMESPACE get pods
+    - |
+      helm upgrade --install geneticscores-frontend "./deployments" -f "./deployments/values-${ENV_FILE}.yaml" \
+      --namespace "$NAMESPACE" \
+      --set image.tag="$CI_COMMIT_TAG"
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "web" && $CI_COMMIT_TAG && $CI_COMMIT_TAG =~ $TAG_REGEX && $STAGE == $DEPLOY_STAGE'
+      when: manual
