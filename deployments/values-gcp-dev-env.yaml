@@ -9,7 +9,7 @@ replicaCount: 1
 
 # Image details
 image:
-  repository: dockerhub.ebi.ac.uk/gdp/igs4eu-platform-frontend
+  repository: dockerhub.ebi.ac.uk/gdp/geneticscores-platform-frontend
   tag: 0.0.1
   tagPostfix: dev
   pullPolicy: Always
