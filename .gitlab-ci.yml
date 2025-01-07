@@ -12,6 +12,7 @@ variables:
 stages:
   - build
   - containerize
+  - deploy
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
