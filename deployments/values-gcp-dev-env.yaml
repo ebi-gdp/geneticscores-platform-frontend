@@ -1,0 +1,24 @@
+# Service name
+serviceName: igs4eu-frontend
+
+# Namespace
+namespace: intervene-dev
+
+# Replica count for development
+replicaCount: 1
+
+# Image details
+image:
+  repository: dockerhub.ebi.ac.uk/gdp/igs4eu-platform-frontend
+  tag: 0.0.1
+  tagPostfix: dev
+  pullPolicy: Always
+
+# Kubernetes resource limits for development
+resources:
+  limits:
+    cpu: "1"
+    memory: "256Mi"
+  requests:
+    cpu: "0.5"
+    memory: "128Mi"
