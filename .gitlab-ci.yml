@@ -1,10 +1,13 @@
 variables:
   TARGET_PLATFORM: 'linux/amd64'
   TAG_REGEX: '/^\d+\.\d+\.\d+$/'
+  BUILD_TEST_STAGE: 'BUILD_TEST'
+  CONTAINERIZE_STAGE: 'CONTAINERIZE'
+  RETAG_STAGE: 'RETAG'
   DEPLOY_STAGE: 'DEPLOY'
   STAGE:
-    description: 'Pipeline stage. For deployment stage set this value to DEPLOY'
-    value: 'BUILD_CONTAINERIZE'
+    description: 'Pipeline stages, BUILD_TEST, CONTAINERIZE, RETAG & DEPLOY. Select appropriately!'
+    value: 'BUILD_TEST'
   PLATFORM_ENV:
     description: 'Platform environment, dev is default. For production use prod, only required for DEPLOY stage.'
     value: 'dev'
@@ -12,6 +15,7 @@ variables:
 stages:
   - build
   - containerize
+  - retag
   - deploy
 
 cache:
@@ -31,7 +35,7 @@ build:
     paths:
       - build/
   rules:
-    - if: '$STAGE != $DEPLOY_STAGE'
+    - if: '$STAGE == $BUILD_TEST_STAGE || $STAGE == $CONTAINERIZE_STAGE'
       when: always
 
 containerize:
@@ -46,8 +50,27 @@ containerize:
       --build-arg "TARGET_PLATFORM=${TARGET_PLATFORM}"
       --destination "${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}-dev"
   rules:
-    - if: '$CI_COMMIT_TAG && $CI_COMMIT_TAG =~ $TAG_REGEX && $STAGE != $DEPLOY_STAGE'
+    - if: '$CI_PIPELINE_SOURCE == "web" && $CI_COMMIT_TAG && $CI_COMMIT_TAG =~ $TAG_REGEX && $STAGE == $CONTAINERIZE_STAGE'
       when: always
+
+retag:
+  stage: retag
+  image:
+    name: docker:20.10.16
+    entrypoint: [ "" ]
+  services:
+    - docker:dind
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG-dev
+    - docker tag $CI_REGISTRY_IMAGE:dev $CI_REGISTRY_IMAGE:prod
+    - docker push $CI_REGISTRY_IMAGE:prod
+    - docker rmi $CI_REGISTRY_IMAGE:dev $CI_REGISTRY_IMAGE:prod
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "web" && $CI_COMMIT_TAG && $CI_COMMIT_TAG =~ $TAG_REGEX && $STAGE == $RETAG_STAGE'
+      when: manual
 
 deploy:
   stage: deploy
