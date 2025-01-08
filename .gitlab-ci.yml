@@ -55,13 +55,9 @@ containerize:
 
 retag:
   stage: retag
-  image: docker:19.03.12  # Docker image for the runner
+  image: docker:20.10.14  # Docker image for the runner
   services:
-    - name: docker:19.03.12-dind  # Docker-in-Docker service
-      alias: docker
-  variables:
-    DOCKER_TLS_CERTDIR: "/certs"  # Certs location (for secure Docker-in-Docker)
-    DOCKER_HOST: "tcp://docker:2375"  # Docker daemon endpoint
+    - docker:20.10.14-dind
   script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
     - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG-dev
