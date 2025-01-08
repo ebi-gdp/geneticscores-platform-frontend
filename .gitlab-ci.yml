@@ -57,7 +57,8 @@ retag:
   stage: retag
   image: docker:19.03.12  # Docker image for the runner
   services:
-    - docker:19.03.12-dind  # Docker-in-Docker service
+    - name: docker:19.03.12-dind  # Docker-in-Docker service
+      alias: docker
   variables:
     DOCKER_TLS_CERTDIR: "/certs"  # Certs location (for secure Docker-in-Docker)
     DOCKER_HOST: "tcp://docker:2375"  # Docker daemon endpoint
