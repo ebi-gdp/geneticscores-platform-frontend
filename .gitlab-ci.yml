@@ -43,8 +43,6 @@ containerize:
   image:
     name: gcr.io/kaniko-project/executor:v1.14.0-debug
     entrypoint: [ "" ]
-  variables:
-    GIT_STRATEGY: none
   script:
     - /kaniko/executor
       --context "${CI_PROJECT_DIR}"
@@ -73,7 +71,6 @@ deploy:
   stage: deploy
   image: alpine/k8s:1.32.0
   variables:
-    GIT_STRATEGY: none
     K8S_CLUSTER_AGENT: gdp/ga4k:gcp-k8s-agent
     ENV_FILE: 'gcp-dev-env'
     NAMESPACE: 'intervene-dev'
