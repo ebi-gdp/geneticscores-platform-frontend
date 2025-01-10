@@ -1,0 +1,24 @@
+# Service name
+serviceName: igs4eu-frontend
+
+# Namespace
+namespace: intervene-prod
+
+# Replica count for development
+replicaCount: 1
+
+# Image details
+image:
+  repository: dockerhub.ebi.ac.uk/gdp/geneticscores-platform-frontend
+  tag: 0.0.1
+  tagPostfix: prod
+  pullPolicy: Always
+
+# Kubernetes resource limits for development
+resources:
+  limits:
+    cpu: "1"
+    memory: "512Mi"
+  requests:
+    cpu: "0.5"
+    memory: "256Mi"

@@ -56,18 +56,13 @@ containerize:
 retag:
   stage: retag
   image:
-    name: docker:20.10.16
-    entrypoint: [ "" ]
-  services:
-    - docker:dind
+    name: gcr.io/go-containerregistry/crane:debug
+    entrypoint: [""]
   variables:
-    DOCKER_HOST: tcp://docker:2375
+    GIT_STRATEGY: none
   script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG-dev
-    - docker tag $CI_REGISTRY_IMAGE:dev $CI_REGISTRY_IMAGE:prod
-    - docker push $CI_REGISTRY_IMAGE:prod
-    - docker rmi $CI_REGISTRY_IMAGE:dev $CI_REGISTRY_IMAGE:prod
+    - crane auth login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+    - crane cp "$CI_REGISTRY_IMAGE:$CI_COMMIT_TAG-dev" "$CI_REGISTRY_IMAGE:$CI_COMMIT_TAG-prod"
   rules:
     - if: '$CI_PIPELINE_SOURCE == "web" && $CI_COMMIT_TAG && $CI_COMMIT_TAG =~ $TAG_REGEX && $STAGE == $RETAG_STAGE'
       when: manual
