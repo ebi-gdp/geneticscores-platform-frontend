@@ -1,5 +1,6 @@
 import {Link} from "react-router-dom";
 import {menuTextColor} from "./NavigationBar";
+import {DOCS_URL} from "../util/URIConstants";
 
 export const PublicNav = () => {
     return (
@@ -7,7 +8,7 @@ export const PublicNav = () => {
             key="documentation">
             <Link target="_blank"
                   className="vf-navigation__link vf-mega-menu__link"
-                  to="https://docs.intervenegeneticscores.org"
+                  to={DOCS_URL}
                   style={menuTextColor}>Documentation</Link>
         </li>
     );

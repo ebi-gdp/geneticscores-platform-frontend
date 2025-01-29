@@ -20,3 +20,5 @@ export const NOT_FOUND_URI: string = "/not-found";
 
 //External URL
 export const GLOBUS_FILE_MANAGER_URI: string = "https://app.globus.org/file-manager";
+
+export const DOCS_URL: string = "https://docs.geneticscores.org";

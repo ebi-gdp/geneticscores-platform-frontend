@@ -1,11 +1,15 @@
 import React, {useEffect} from "react";
 import VfBanner from "./js/vf-banner.react";
+import {textDecoration} from "../navigation/NavigationBar";
+import {Link, useNavigate} from "react-router-dom";
+import {LANDING_PAGE} from "../util/URIConstants";
 
 const Background = {
     background: "#862E86"
 }
 
 export const Footer = () => {
+    const navigate = useNavigate();
 
     useEffect(() => {
         // Create a style element
@@ -41,6 +45,14 @@ export const Footer = () => {
         window.open("https://www.ebi.ac.uk/about/terms-of-use", "_blank", "noopener, noreferrer");
     }
 
+    const interveneProjectWebsite = () => {
+        window.open("https://www.interveneproject.eu", "_blank", "noopener, noreferrer");
+    }
+
+    const navigateToHomePage = () => {
+        navigate(LANDING_PAGE);
+    }
+
     const bannerMessage = `This website uses cookies, and the limiting processing of your personal data to function. By using the site you are agreeing to this as outlined in our 
     <a id="privacy-notice" class="common-link">Privacy Notice</a> 
     and 
@@ -53,7 +65,9 @@ export const Footer = () => {
             <div className="vf-stack vf-stack--200">
                 <div className="vf-box vf-box-theme--primary vf-box--normal" style={Background}>
                     <div className="vf-content">
-                        GeneticScores.org is part of the INTERVENE project.
+                        <Link to="" style={textDecoration} onClick={() => navigateToHomePage()}>
+                            <span className="vf-logo__text intervene-title">GeneticScores.org</span></Link> is part of the<Link to="" style={textDecoration} onClick={() => interveneProjectWebsite()}><span
+                            className="vf-logo__text intervene-title"> INTERVENE</span></Link> project.
                     </div>
                     <br/>
                     <div>

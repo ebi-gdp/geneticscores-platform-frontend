@@ -66,7 +66,8 @@ const SortableTable: React.FC<SortableTableProps> = ({
                             key={col.key}
                             className="vf-table__heading"
                             scope="col"
-                            onClick={col.sortable ? () => handleSort(col.key) : undefined}>
+                            onClick={col.sortable ? () => handleSort(col.key) : undefined}
+                            align="left">
                             <button
                                 className="vf-button vf-button--sm vf-button--icon vf-table__button vf-table__button--sortable">
                                 {col.label}

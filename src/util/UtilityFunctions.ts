@@ -1,7 +1,7 @@
 import {HOMEPAGE_URI, LANDING_PAGE} from "./URIConstants";
 import {EMPTY} from "./Constants";
 
-const defaultTimestamp = "0001-01-01 00:00:00";
+const defaultTimestamp = "01-01-0001 00:00:00";
 
 export const isInvalidSession = (response: any) => {
     return response.status === 401 || response.status === 403;

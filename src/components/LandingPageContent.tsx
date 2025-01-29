@@ -1,4 +1,5 @@
 import {CSSProperties} from "react";
+import {DOCS_URL} from "../util/URIConstants";
 
 export const divHeight: CSSProperties = {
     height: "500px"
@@ -10,7 +11,7 @@ interface LoginType {
 
 export const LandingPageContent = ({login}: LoginType) => {
     const documentationPage = () => {
-        window.open("https://docs.intervenegeneticscores.org", "_blank", "noopener, noreferrer");
+        window.open(DOCS_URL, "_blank", "noopener, noreferrer");
     }
     return (
         <div className="vf-content" style={divHeight}>

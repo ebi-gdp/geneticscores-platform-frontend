@@ -1,6 +1,7 @@
 import {EMPTY} from "../../../../util/Constants";
 import React from "react";
 import {ExistingRecordType} from "./ExistingDataset";
+import {DOCS_URL} from "../../../../util/URIConstants";
 
 export const NewDataset = ({
                                previousStep, openDirOnGuestCollection,
@@ -17,19 +18,22 @@ export const NewDataset = ({
                 <p className="vf-text-body vf-text-body--3">We have created a private destination folder for
                     you to upload your data.
                     You can now upload your data securely by transferring it to our destination
-                    folder.<a href="https://docs.intervenegeneticscores.org/category/upload"
+                    folder.<a href={DOCS_URL}
                               target="_blank"
                               rel="noreferrer"
                               className="vf-link"> Read how to transfer data using Globus.</a>
                 </p>
                 <p className="vf-text-body vf-text-body--3">
                     We only accept data encrypted using the crypt4gh standard. Please download the public encryption key
-                    specific to this data upload and follow the <a href="https://docs.intervenegeneticscores.org/tutorial-encrypt/cli/" target="_blank"
-                       rel="noreferrer" className="vf-link">instructions</a> to encrypt your data
+                    specific to this data upload and follow the <a
+                    href={DOCS_URL + "/tutorial-encrypt/cli/"} target="_blank"
+                    rel="noreferrer" className="vf-link">instructions</a> to encrypt your data
                 </p>
                 <p>
                     <button className="vf-button vf-button--secondary vf-button--sm"
-                            onClick={() => downloadPublicKey(publicKeyDetails.datasetId + ".pub", publicKeyDetails.publicKey)}>Download the public encryption key for this data upload</button>
+                            onClick={() => downloadPublicKey(publicKeyDetails.datasetId + ".pub", publicKeyDetails.publicKey)}>Download
+                        the public encryption key for this data upload
+                    </button>
                 </p>
                 <p className="vf-text-body vf-text-body--3">After encrypting your data, use the button below to access
                     the Globus folder and upload your files. Please upload files only (not folders or directories), and
