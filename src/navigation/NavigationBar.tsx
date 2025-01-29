@@ -6,7 +6,8 @@ import "../css/header.css";
 import {LANDING_PAGE} from "../util/URIConstants";
 
 const headerStyle: CSSProperties = {
-    background: "#007AC3"
+    background: "#007AC3",
+    minHeight: "55px"
 }
 
 export const textDecoration: CSSProperties = {
@@ -23,7 +24,6 @@ export const NavigationBar = () => {
     const navigateToHomePage = () => {
         navigate(LANDING_PAGE);
     }
-
     return (
         <>
             <div className="header">
@@ -34,7 +34,7 @@ export const NavigationBar = () => {
                 <header className="vf-global-header vf-mega-menu" style={headerStyle} role="menubar">
                     <Link to="" style={textDecoration} onClick={() => navigateToHomePage()}>
                     <span style={textDecoration}
-                          className="vf-logo__text intervene-title">GeneticScores.org</span>
+                          className="vf-logo__text intervene-title intervene-title-extended">GeneticScores.org</span>
                     </Link>
                     <nav className="vf-navigation vf-navigation--global | vf-cluster">
                         <ul className="vf-navigation__list | vf-list | vf-cluster__inner">

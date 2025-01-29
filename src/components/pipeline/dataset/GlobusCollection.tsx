@@ -1,4 +1,5 @@
 import {CombinedStepAction} from "./DatasetInputParameters";
+import {DOCS_URL} from "../../../util/URIConstants";
 
 export const GlobusCollection = ({previousStep, nextStep}: CombinedStepAction) => {
     return (
@@ -12,7 +13,7 @@ export const GlobusCollection = ({previousStep, nextStep}: CombinedStepAction) =
                 Keep track of the Globus account identity (email address) you use to create your account.</p>
             <p className="vf-text-body vf-text-body--3">You can upload data &lt; 15 GB via a Globus web browser.</p>
             <p className="vf-text-body vf-text-body--3">If you want to transfer data &gt; 15 GB from your computer
-                you will need to install <a href="https://docs.intervenegeneticscores.org/tutorial-upload/gcp"
+                you will need to install <a href={DOCS_URL}
                                             target="_blank"
                                             rel="noreferrer"
                                             className="vf-link">Globus Connect Personal.</a></p>

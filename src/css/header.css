@@ -12,7 +12,10 @@
 }
 
 .intervene-title {
-    margin-left: 10px;
     color: #ffffff;
     text-decoration: none;
+}
+
+.intervene-title-extended {
+    margin-left: 10px;
 }
