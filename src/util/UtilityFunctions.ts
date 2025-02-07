@@ -47,3 +47,13 @@ export const isSessionExpiredGlobal = (lastAccessTime: string,
 export const formatTimestamp = (timestamp: string) => {
     return timestamp === defaultTimestamp ? "-" : timestamp;
 }
+
+export const successfulPipelineSubmissionMsg = (pipelineId: string): string => {
+    return `<b>Your pipeline request has been successfully submitted (Pipeline ID: ${pipelineId}).<br/>
+    Check the Dashboard for status updates. You will receive an email when the job is
+    complete.</b>`;
+};
+
+export const tooManyRequestsMsg = () => {
+    return `<b>Too many requests! You have exhausted the per day limit quota. Please try again tomorrow.</b>`;
+};

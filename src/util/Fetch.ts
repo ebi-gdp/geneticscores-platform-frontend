@@ -4,6 +4,7 @@ import {BadRequestError} from "../components/error/BadRequestError";
 import {DataNotFoundError} from "../components/error/DataNotFoundError";
 import ClientError from "../components/error/ClientError";
 import {ServerError} from "../components/error/ServerError";
+import {TooManyRequestError} from "../components/error/TooManyRequestError";
 
 export const fetchData = async (url: string) => {
     const response = await fetch(url, {
@@ -66,6 +67,8 @@ const handleResponse = async (response: any) => {
         throw new BadRequestError({message: "Bad request", responseData});
     } else if (httpStatus === 404) {
         throw new DataNotFoundError("Data not found");
+    } else if (httpStatus === 429) {
+        throw new TooManyRequestError("Too many requests");
     } else if (httpStatus > 400 && httpStatus < 500) {
         throw new ClientError({message: "Client error http status: " + httpStatus});
     } else {
