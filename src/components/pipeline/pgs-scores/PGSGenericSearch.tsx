@@ -14,6 +14,9 @@ import {PublicationType} from "./SelectPolygenicScoresByPublication";
 import {useAuth} from "../../../auth/UserProvider";
 import {isSessionExpiredGlobal} from "../../../util/UtilityFunctions";
 import {ContentRenderHandler} from "../../error/ContentRenderHandler";
+import {TooManyRequestError} from "../../error/TooManyRequestError";
+import {TooManyPipelineSubmissionMsg} from "./messages/TooManyPipelineSubmissionMsg";
+import {PipelineSubmissionSuccessMsg} from "./messages/PipelineSubmissionSuccessMsg";
 
 interface CommonSearchType extends PreviousStepAction {
     searchType: string,
@@ -49,6 +52,8 @@ export const PGSGenericSearch = ({
     const [isSessionExpired, setIsSessionExpired] = useState<boolean>(false);
     const [serverErrorMsg, setServerErrorMsg] = useState<string>(EMPTY);
     const [searchMessage, setSearchMessage] = useState<React.JSX.Element | null>(null);
+    const [tooManyRequests, setTooManyRequests] = useState<boolean>(false);
+    const [numberOfScoreLimitReached, setNumberOfScoreLimitReached] = useState<boolean>(false);
     const pipelineURI = PIPELINE_MANAGER_URI + "/pipeline";
 
     const searchScores = useCallback((searchTerm: string) => {
@@ -109,8 +114,14 @@ export const PGSGenericSearch = ({
 
     const selectScore = ({id, label, pgsIdsSize}: ScoreType) => {
         setScores(null);
+
+        if (pgsIdsSize > 100) {
+            setNumberOfScoreLimitReached(true);
+        } else {
+            setNumberOfScoreLimitReached(false);
+            setErrors(EMPTY);
+        }
         setSelectedScore(buildPublicationRecord(id, label, pgsIdsSize));
-        setErrors(EMPTY);
     }
 
     const validatePipelineParameters = async () => {
@@ -121,6 +132,9 @@ export const PGSGenericSearch = ({
             setIsLoading(true);
             if (selectedScore === null) {
                 setErrors(searchType + " not selected! search for " + searchType + "s");
+                setIsLoading(false);
+            } else if (numberOfScoreLimitReached) {
+                setErrors("Number of scores should be less than or equal to 100. Please select another option!");
                 setIsLoading(false);
             } else {
                 executePolygenicScoringPipeline().then();
@@ -151,6 +165,7 @@ export const PGSGenericSearch = ({
         }).then(() => {
             setErrors(EMPTY);
             setDisableTriggerButton(true);
+            setTooManyRequests(false);
         }).catch(reason => {
             handlerError(reason);
         }).finally(() => {
@@ -173,6 +188,9 @@ export const PGSGenericSearch = ({
     const handlerError = (reason: any) => {
         if (reason instanceof SessionExpiredError) {
             setIsSessionExpired(true);
+        } else if (reason instanceof TooManyRequestError) {
+            setTooManyRequests(true);
+            setDisableTriggerButton(true);
         } else {
             setServerErrorMsg(reason.message);
         }
@@ -233,8 +251,9 @@ export const PGSGenericSearch = ({
             </div>
             <br/>
             {errors !== EMPTY && <div className="vl-red-text" id="error">{errors}</div>}
-            {disableTriggerButton ? (<b>Your pipeline request has been successfully submitted (Pipeline ID: {pipelineId}).<br/>
-                Check the Dashboard for status updates. You will receive an email when the job is complete.</b>) : (
+            {disableTriggerButton && errors === EMPTY ? (
+                tooManyRequests ? <TooManyPipelineSubmissionMsg/> :
+                    <PipelineSubmissionSuccessMsg pipelineId={pipelineId}/>) : (
                 <button className="vf-button vf-button--primary vf-button--sm"
                         onClick={() => validatePipelineParameters()}>Trigger Pipeline</button>
             )}

@@ -11,6 +11,9 @@ import {postJsonData, postPlainData} from "../../../util/Fetch";
 import {useAuth} from "../../../auth/UserProvider";
 import {isSessionExpiredGlobal} from "../../../util/UtilityFunctions";
 import {ContentRenderHandler} from "../../error/ContentRenderHandler";
+import {TooManyRequestError} from "../../error/TooManyRequestError";
+import {PipelineSubmissionSuccessMsg} from "./messages/PipelineSubmissionSuccessMsg";
+import {TooManyPipelineSubmissionMsg} from "./messages/TooManyPipelineSubmissionMsg";
 
 export const AddPolygenicScoreIDs = ({previousStep}: PreviousStepAction) => {
     const {lastAccessTime, maxIdleTime, updateLastAccessTime} = useAuth();
@@ -22,6 +25,7 @@ export const AddPolygenicScoreIDs = ({previousStep}: PreviousStepAction) => {
     const [isSessionExpired, setIsSessionExpired] = useState<boolean>(false);
     const [serverErrorMsg, setServerErrorMsg] = useState<string>(EMPTY);
     const [pgsIds, setPgsIds] = useState<string>(polygenicScoreIds.replace(/\n/g, "<br>"));
+    const [tooManyRequests, setTooManyRequests] = useState<boolean>(false);
     const invalidPGSIdError = "The PGS IDs (marked in red) are not in the PGS Catalog. Remove these PGS IDs from the input field below.";
     const divRef = useRef<HTMLDivElement>(null);
     const pipelineURI = PIPELINE_MANAGER_URI + "/pipeline";
@@ -105,7 +109,13 @@ export const AddPolygenicScoreIDs = ({previousStep}: PreviousStepAction) => {
                     .map((pgsIds) => {
                         return pgsIds.trim();
                     })
-                executePolygenicScoringPipeline(polygenicScoreIdsArray).then();
+
+                if (polygenicScoreIdsArray.length > 100) {
+                    setErrors("Number of PGS IDs should be less than or equal to 100!");
+                    setIsLoading(false);
+                } else {
+                    executePolygenicScoringPipeline(polygenicScoreIdsArray).then();
+                }
             }
         }
     }
@@ -116,12 +126,16 @@ export const AddPolygenicScoreIDs = ({previousStep}: PreviousStepAction) => {
             const pipelineId = await createPipeline();
             await executePipeline(pipelineId, polygenicScoreIdsArray);
             setPipelineId(pipelineId);
+            setTooManyRequests(false);
             setIsLoading(false);
         } catch (error: any) {
             if (error instanceof SessionExpiredError) {
                 setIsSessionExpired(true);
             } else if (error instanceof BadRequestError) {
                 buildPGSIdsErrorMsg(error.responseData);
+            } else if (error instanceof TooManyRequestError) {
+                setTooManyRequests(true);
+                setDisableTriggerButton(true);
             } else {
                 setServerErrorMsg(error.message);
             }
@@ -226,9 +240,8 @@ export const AddPolygenicScoreIDs = ({previousStep}: PreviousStepAction) => {
             </p>
             <div>
                 {disableTriggerButton ? (
-                    <b>Your pipeline request has been successfully submitted (Pipeline ID: {pipelineId}).<br/>
-                        Check the Dashboard for status updates. You will receive an email when the job is
-                        complete.</b>) : (
+                    tooManyRequests ? <TooManyPipelineSubmissionMsg/> :
+                        <PipelineSubmissionSuccessMsg pipelineId={pipelineId}/>) : (
                     <button className="vf-button vf-button--primary vf-button--sm"
                             onClick={() => validatePipelineParameters()}>Trigger Pipeline</button>
                 )}
