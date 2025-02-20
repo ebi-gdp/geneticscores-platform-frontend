@@ -38,7 +38,7 @@ export const Footer = () => {
     }, []);
 
     const privacyNoticePage = () => {
-        window.open("https://www.ebi.ac.uk/data-protection/privacy-notice/intervene-platform-analysis-service", "_blank", "noopener, noreferrer");
+        window.open("https://www.ebi.ac.uk/data-protection/privacy-notice/geneticscoresorg-public-website/", "_blank", "noopener, noreferrer");
     }
 
     const termOfUsePage = () => {
