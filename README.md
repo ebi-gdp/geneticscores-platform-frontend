@@ -14,7 +14,7 @@ Before you begin, ensure you have met the following requirements:
 
 Follow these steps to set up, build, and run the application:
 
-### 1. Run the following command to clone the repository:
+### 1. Run the following command to clone the repository
    ```bash
    git clone https://github.com/ebi-gdp/geneticscores-platform-frontend.git
    ```
