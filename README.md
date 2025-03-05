@@ -16,9 +16,13 @@ Before you begin, ensure you have met the following requirements:
 
 To run application, follow these steps:
 
-1. Clone the repository:
+1. Clone the repository and install dependencies:
    ```bash
    git clone https://github.com/ebi-gdp/igs4eu-platform-frontend.git
+   cd geneticscores-platform-frontend
+   npm install
+   ```
+
 2. Before you run the application, Navigate to project's root directory:
    ```bash
    npm start
