@@ -17,8 +17,8 @@ export const DataRequirements = ({nextStep}: NextStepAction) => {
                 <h2>Your data must</h2>
                 <ul className="vf-list vf-list--unordered">
                     <li className="vf-list__item" key="li-1">Encrypted using crypt4gh (the public encryption key can be downloaded from the 'Transfer Your Data' page).</li>
-                    <li className="vf-list__item" key="li-2">Must be in PLINK2, PLINK1, or VCF format.</li>
-                    <li className="vf-list__item" key="li-3">Contain chromosomes 1 to 22, X and Y only. Your chromosomes must not include “chr” (use “1” instead of “chr1”).</li>
+                    <li className="vf-list__item" key="li-2">Must be in PLINK1 (bed / bim / fam) or PLINK2 (pgen / pvar / psam) format.</li>
+                    <li className="vf-list__item" key="li-3">Contain chromosomes 1 to 22, X and Y only in a single fileset (uploading data split by chromosome is not supported).</li>
                     <li className="vf-list__item" key="li-4">Use human genome reference build GRCh38 or GRCh37 coordinates.</li>
                 </ul>
                 <br/>
