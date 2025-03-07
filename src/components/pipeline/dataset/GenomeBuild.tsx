@@ -73,7 +73,7 @@ export const GenomeBuild = ({previousStep, nextStep}: CombinedStepAction) => {
             <h1>Name your data as a sample set</h1>
             <p className="vf-text-body vf-text-body--3">We will use this name to help you keep track of your uploaded data and results.
                 A sample set should contain files that relate to the same group of individuals.</p>
-            <p className="vf-text-body vf-text-body--3">Use alphanumeric and ‘-’ characters only. The word ‘reference’ alone is not allowed.</p>
+            <p className="vf-text-body vf-text-body--3">Enter between 8 to 50 alphanumeric characters and ‘-’ characters only. The word ‘reference’ alone is not allowed.</p>
             <br/>
             <div className="vf-grid">
                 <form className="vf-stack vf-stack--400">
