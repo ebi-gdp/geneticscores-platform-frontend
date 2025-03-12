@@ -39,7 +39,7 @@ export const ExistingDataset = ({
                     </button>
                 </p>
                 <button className="vf-button vf-button--primary vf-button--sm"
-                        onClick={() => validateFiles()}>Continue
+                        onClick={() => validateFiles()}>I have transferred my data
                 </button>
             </div>
             <div className="red-text" id="genome-build-error">{errors !== EMPTY &&
