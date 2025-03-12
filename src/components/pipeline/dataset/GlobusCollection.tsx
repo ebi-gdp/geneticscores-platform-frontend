@@ -1,5 +1,5 @@
 import {CombinedStepAction} from "./DatasetInputParameters";
-import {DOCS_URL} from "../../../util/URIConstants";
+import {DOCS_URL, GLOBUS_FILE_MANAGER_URI} from "../../../util/URIConstants";
 
 export const GlobusCollection = ({previousStep, nextStep}: CombinedStepAction) => {
     return (
@@ -14,7 +14,7 @@ export const GlobusCollection = ({previousStep, nextStep}: CombinedStepAction) =
                                             rel="noreferrer"
                                             className="vf-link">Globus</a> account to upload your data.
                 Keep track of the Globus account identity (email address) you use to create your account.</p>
-            <p className="vf-text-body vf-text-body--3">You can upload data &lt; 15 GB via <a href="https://app.globus.org/file-manager"
+            <p className="vf-text-body vf-text-body--3">You can upload data &lt; 15 GB via <a href={GLOBUS_FILE_MANAGER_URI}
                                             target="_blank"
                                             rel="noreferrer"
                                             className="vf-link">a Globus web browser.</a></p>

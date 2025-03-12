@@ -1,9 +1,7 @@
-import {Link, useNavigate} from "react-router-dom";
 import {PublicNav} from "./PublicNavigation";
 import {AuthorizedNavigation} from "./AuthorizedNavigation";
 import {CSSProperties} from "react";
 import "../css/header.css";
-import {LANDING_PAGE} from "../util/URIConstants";
 import {GENETIC_SCORES_ORG} from "../util/URIConstants";
 
 const headerStyle: CSSProperties = {
@@ -20,11 +18,6 @@ export const menuTextColor: CSSProperties = {
 }
 
 export const NavigationBar = () => {
-    const navigate = useNavigate();
-
-    const navigateToHomePage = () => {
-        navigate(LANDING_PAGE);
-    }
     return (
         <>
             <div className="header">
