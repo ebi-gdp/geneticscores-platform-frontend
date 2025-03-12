@@ -15,7 +15,7 @@ export const SelectPolygenicScoresLandingPage = ({previousStep, nextStep}: Combi
                     <dt className="vf-list__item vf-list--definition__term">
                         <button className="vf-button vf-button--primary vf-button--sm"
                                   onClick={() => nextStep(1)}>Select
-                        Polygenic Scores by Trait(s)</button></dt>
+                        Polygenic Scores by Trait</button></dt>
                     <dt className="vf-list__item vf-list--definition__term">
                         <button className="vf-button vf-button--primary vf-button--sm"
                                   type="button"
