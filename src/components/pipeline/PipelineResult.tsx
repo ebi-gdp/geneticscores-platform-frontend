@@ -31,7 +31,7 @@ export const PipelineResult = () => {
                     } else {
                         setFiles(responseBodyAsJson.files
                             .map((filePath: string) => {
-                                    const filename = filePath.substring(filePath.lastIndexOf("/") + 1);
+                                    const filename = buildFilename(responseBodyAsJson.pipelineId, filePath.substring(filePath.lastIndexOf("/") + 1));
                                     setPipelineId(responseBodyAsJson.pipelineId);
                                     return listFiles(responseBodyAsJson.pipelineId, filePath, filename);
                                 }
@@ -60,6 +60,10 @@ export const PipelineResult = () => {
             loadSuccessfulResult(loadSuccessfulResultURI).then();
         }
     }, []);
+
+    const buildFilename = (pipelineId: string, filename: string) => {
+        return pipelineId + "_" + filename;
+    }
 
     const listFiles = (pipelineId: string, filePath: string, filename: string) => {
         return (
