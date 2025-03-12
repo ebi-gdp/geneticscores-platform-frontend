@@ -1,5 +1,5 @@
 import {CombinedStepAction} from "./DatasetInputParameters";
-import {DOCS_URL, GLOBUS_FILE_MANAGER_URI} from "../../../util/URIConstants";
+import {GLOBUS_GCP_DOCS_URL, GLOBUS_FILE_MANAGER_URI} from "../../../util/URIConstants";
 
 export const GlobusCollection = ({previousStep, nextStep}: CombinedStepAction) => {
     return (
@@ -19,7 +19,7 @@ export const GlobusCollection = ({previousStep, nextStep}: CombinedStepAction) =
                                             rel="noreferrer"
                                             className="vf-link">a Globus web browser.</a></p>
             <p className="vf-text-body vf-text-body--3">If you want to transfer data &gt; 15 GB from your computer
-                you will need to install <a href={DOCS_URL}
+                you will need to install <a href={GLOBUS_GCP_DOCS_URL}
                                             target="_blank"
                                             rel="noreferrer"
                                             className="vf-link">Globus Connect Personal.</a></p>

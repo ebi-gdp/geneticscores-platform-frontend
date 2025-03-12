@@ -24,3 +24,5 @@ export const GLOBUS_FILE_MANAGER_URI: string = "https://app.globus.org/file-mana
 export const DOCS_URL: string = "https://docs.geneticscores.org";
 
 export const GENETIC_SCORES_ORG: string = "https://geneticscores.org";
+
+export const GLOBUS_GCP_DOCS_URL: string = "https://docs.geneticscores.org/tutorial-upload/gcp/index.html";
