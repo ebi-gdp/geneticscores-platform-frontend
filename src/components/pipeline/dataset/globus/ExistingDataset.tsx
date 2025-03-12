@@ -28,7 +28,7 @@ export const ExistingDataset = ({
                         onClick={() => previousStep(1)}>Back
                 </button>
                 <h1>Continue with previously uploaded data</h1><br/>
-                <h4>{datasetName}</h4>
+                <h4>Sample set name: {datasetName}</h4>
                 <p>
                     <button className="vf-button vf-button--secondary vf-button--sm"
                             onClick={() => downloadPublicKey(publicKeyDetails.datasetId + ".pub", publicKeyDetails.publicKey)}>Download the public encryption key for this data upload</button>
