@@ -4,6 +4,7 @@ import {AuthorizedNavigation} from "./AuthorizedNavigation";
 import {CSSProperties} from "react";
 import "../css/header.css";
 import {LANDING_PAGE} from "../util/URIConstants";
+import {GENETIC_SCORES_ORG} from "../util/URIConstants";
 
 const headerStyle: CSSProperties = {
     background: "#007AC3",
@@ -32,10 +33,10 @@ export const NavigationBar = () => {
                     className="under-development"><b>Under development - suitable for non-sensitive data only</b></span>
                 </header>
                 <header className="vf-global-header vf-mega-menu" style={headerStyle} role="menubar">
-                    <Link to="" style={textDecoration} onClick={() => navigateToHomePage()}>
+                    <a href={GENETIC_SCORES_ORG} style={textDecoration}>
                     <span style={textDecoration}
                           className="vf-logo__text intervene-title intervene-title-extended">GeneticScores.org</span>
-                    </Link>
+                    </a>
                     <nav className="vf-navigation vf-navigation--global | vf-cluster">
                         <ul className="vf-navigation__list | vf-list | vf-cluster__inner">
                             <PublicNav/>
