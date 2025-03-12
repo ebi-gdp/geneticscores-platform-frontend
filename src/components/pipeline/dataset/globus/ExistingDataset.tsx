@@ -29,6 +29,7 @@ export const ExistingDataset = ({
                 </button>
                 <h1>Continue with previously uploaded data</h1><br/>
                 <h4>Sample set name: {datasetName}</h4>
+                <p>We cannot assess if you have completed your data transfer. Please confirm that you have completed the data transfer (by checking your destination folder) before proceeding.</p>
                 <p>
                     <button className="vf-button vf-button--secondary vf-button--sm"
                             onClick={() => downloadPublicKey(publicKeyDetails.datasetId + ".pub", publicKeyDetails.publicKey)}>Download the public encryption key for this data upload</button>
