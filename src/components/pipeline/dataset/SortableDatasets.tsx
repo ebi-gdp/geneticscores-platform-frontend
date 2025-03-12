@@ -102,7 +102,7 @@ export const SortableDatasets = ({data, pageCount, pageOffset, handlePageChange,
                                 navigate(PGS_CALCULATOR + "/dataset/" + item.datasetId);
                             }
                         }}>
-                        "View"
+                        {item.expired || item.deleted ? "" : "View"}
                     </button>
                 </>
             )
