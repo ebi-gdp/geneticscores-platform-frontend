@@ -6,7 +6,7 @@ export const SelectPolygenicScoresLandingPage = ({previousStep, nextStep}: Combi
         <div className="vf-content">
             <br/>
             <button className="vf-link-button" type="button" onClick={() => previousStep(1)}>Back</button>
-            <h1>Select your polygenic score(s)</h1>
+            <h1>Select your polygenic scores</h1>
             <br/>
                 <h4>Please select one of the following options to proceed</h4>
             <br/>
@@ -20,11 +20,11 @@ export const SelectPolygenicScoresLandingPage = ({previousStep, nextStep}: Combi
                         <button className="vf-button vf-button--primary vf-button--sm"
                                   type="button"
                                   onClick={() => nextStep(2)}>Select
-                        Polygenic Scores by Publication(s)</button></dt>
+                        Polygenic Scores by Publication</button></dt>
                     <dt className="vf-list__item vf-list--definition__term">
                         <button className="vf-button vf-button--primary vf-button--sm"
                                   type="button"
-                                  onClick={() => nextStep(3)}>Add Polygenic Scores ID(s)</button></dt>
+                                  onClick={() => nextStep(3)}>Add Polygenic Scores IDs</button></dt>
                 </dl>
             </div>
         </div>
