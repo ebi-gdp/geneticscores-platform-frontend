@@ -55,5 +55,5 @@ export const successfulPipelineSubmissionMsg = (pipelineId: string): string => {
 };
 
 export const tooManyRequestsMsg = () => {
-    return `<b>Too many requests! You have exhausted the per day limit quota. Please try again tomorrow.</b>`;
+    return `<b>You have exhausted your daily quota of <a href="https://docs.geneticscores.org/how-to/scores#limits">5 pipeline submissions per day.</a></b>`;
 };

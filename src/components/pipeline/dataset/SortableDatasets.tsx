@@ -32,8 +32,8 @@ export const SortableDatasets = ({data, pageCount, pageOffset, handlePageChange,
 
     const confirmDeleteDataset = (datasetId: string) => {
         confirmAlert({
-            title: "Confirm to delete",
-            message: "Are you sure to do this",
+            title: "Deleting completely removes this sample set.",
+            message: "Are you sure you want to delete?",
             buttons: [
                 {
                     label: "Yes",
@@ -102,7 +102,7 @@ export const SortableDatasets = ({data, pageCount, pageOffset, handlePageChange,
                                 navigate(PGS_CALCULATOR + "/dataset/" + item.datasetId);
                             }
                         }}>
-                        {item.expired || item.deleted ? "" : "Launch Job"}
+                        {item.expired || item.deleted ? "" : "View"}
                     </button>
                 </>
             )

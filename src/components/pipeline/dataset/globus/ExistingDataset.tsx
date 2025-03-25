@@ -28,7 +28,8 @@ export const ExistingDataset = ({
                         onClick={() => previousStep(1)}>Back
                 </button>
                 <h1>Continue with previously uploaded data</h1><br/>
-                <h4>{datasetName}</h4>
+                <h4>Sample set name: {datasetName}</h4>
+                <p>We cannot assess if you have completed your data transfer. Please confirm that you have completed the data transfer (by checking your destination folder) before proceeding.</p>
                 <p>
                     <button className="vf-button vf-button--secondary vf-button--sm"
                             onClick={() => downloadPublicKey(publicKeyDetails.datasetId + ".pub", publicKeyDetails.publicKey)}>Download the public encryption key for this data upload</button>
@@ -39,7 +40,7 @@ export const ExistingDataset = ({
                     </button>
                 </p>
                 <button className="vf-button vf-button--primary vf-button--sm"
-                        onClick={() => validateFiles()}>Continue
+                        onClick={() => validateFiles()}>I have transferred my data
                 </button>
             </div>
             <div className="red-text" id="genome-build-error">{errors !== EMPTY &&

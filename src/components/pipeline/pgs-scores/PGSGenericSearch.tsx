@@ -60,7 +60,7 @@ export const PGSGenericSearch = ({
         setScores(null);
         setErrors(EMPTY);
         setDisableTriggerButton(false);
-        setSearchMessage(<>Searching {searchType}(s)...</>);
+        setSearchMessage(<>Searching {searchType}...</>);
 
         if (searchTerm.length === 0) {
             setSearchMessage(<span style={redText}>Search term is empty!</span>);
@@ -94,7 +94,7 @@ export const PGSGenericSearch = ({
                     setIsSessionExpired(true);
                 } else if (reason instanceof DataNotFoundError) {
                     setUlStyle(ulStyleBuilder(50));
-                    setSearchMessage(<span style={redText}>{searchType}(s) not found!</span>);
+                    setSearchMessage(<span style={redText}>{searchType} not found!</span>);
                 } else {
                     setServerErrorMsg(reason.message);
                 }
@@ -134,7 +134,7 @@ export const PGSGenericSearch = ({
                 setErrors(searchType + " not selected! search for " + searchType + "s");
                 setIsLoading(false);
             } else if (numberOfScoreLimitReached) {
-                setErrors("Number of scores should be less than or equal to 100. Please select another option!");
+                setErrors("The number of scores per pipeline run is limited to <= 100. Please see \"select polygenic scores\" page in the documentation for suggestions.");
                 setIsLoading(false);
             } else {
                 executePolygenicScoringPipeline().then();
@@ -203,7 +203,7 @@ export const PGSGenericSearch = ({
             <button className="vf-link-button" type="button"
                     onClick={() => previousStep(searchType === TRAIT_SEARCH ? 1 : 2)}>Back
             </button>
-            <h1>Select your polygenic scores by {searchType}(s)</h1>
+            <h1>Select your polygenic scores by {searchType}s</h1>
             <p className="vf-text-body vf-text-body--3">Search for a {searchType} to view its polygenic scores
                 from
                 the PGS
