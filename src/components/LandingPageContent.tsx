@@ -41,14 +41,16 @@ export const LandingPageContent = ({login}: LoginType) => {
                 </div>
                 <div className="vf-box">
                     <h3>Ready to start?</h3>
-                    If you are ready to upload data please log in to use our service.
+                    This service is currently undergoing maintenance. <a href="https://geneticscores.org/posts/">Please check our recent updates for more details.</a>
                     <br/><br/>
-                    After log in you will be lead through the process of uploading data and configuring the
-                    pipeline.
+                    Log in has been temporarily disabled.
                     <br/>
                     <br/>
+                    
+                    {/* 
                     <button className="vf-button vf-button--primary vf-button--sm" onClick={() => login()}>Log in
                     </button>
+                    */}
                 </div>
             </div>
         </div>
