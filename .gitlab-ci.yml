@@ -1,6 +1,6 @@
 variables:
   TARGET_PLATFORM: 'linux/amd64'
-  TAG_REGEX: '/^\d+\.\d+\.\d+$/'
+  TAG_REGEX: '/^\d+\.\d+\.\d+(?:\+[0-9A-Za-z.-]+)?$/'
   BUILD_TEST_STAGE: 'BUILD_TEST'
   CONTAINERIZE_STAGE: 'CONTAINERIZE'
   RETAG_STAGE: 'RETAG'
