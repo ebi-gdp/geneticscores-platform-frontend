@@ -21,10 +21,12 @@ export const NavigationBar = () => {
     return (
         <>
             <div className="header">
+                {/*
                 <header className="vf-global-header vf-mega-menu header-menu">
                 <span
                     className="under-development"><b>Under development - suitable for non-sensitive data only</b></span>
                 </header>
+                */}
                 <header className="vf-global-header vf-mega-menu" style={headerStyle} role="menubar">
                     <a href={GENETIC_SCORES_ORG} style={textDecoration}>
                     <span style={textDecoration}
