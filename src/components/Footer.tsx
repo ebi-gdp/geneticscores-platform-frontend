@@ -38,7 +38,7 @@ export const Footer = () => {
     }, []);
 
     const privacyNoticePage = () => {
-        window.open("https://www.ebi.ac.uk/data-protection/privacy-notice/geneticscoresorg-analysis-service/", "_blank", "noopener, noreferrer");
+        window.open("https://docs.geneticscores.org/files/privacynotices/calculate.pdf", "_blank", "noopener, noreferrer");
     }
 
     const termOfUsePage = () => {
